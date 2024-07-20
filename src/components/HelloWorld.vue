@@ -1,6 +1,6 @@
 <template>
   <section class="host">
-    <h3 class="title">{{ title }} :</h3>
+    <h3 class="title">{{ counterData.title }} :</h3>
 
     <div class="counter">
       <button @click="decrement"
@@ -8,7 +8,7 @@
         -
       </button>
 
-      <div class="counter-val">{{ count }}</div>
+      <div class="counter-val">{{ counterData.count }}</div>
 
       <button @click="increment"
               class="counter-plus">
@@ -20,7 +20,8 @@
     <div class="edit">
       <h4 class="edit-title">Edit title:</h4>
       <div class="edit__input-text">
-        <input v-model="title" type="text"
+        <input v-model="counterData.title"
+               type="text"
                class="input-text">
       </div>
     </div>
@@ -29,13 +30,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { reactive } from 'vue';
 
-const count = ref(0);
-const title = ref('Counter App');
+const counterData = reactive({
+  count: 0,
+  title: 'My Counter',
+});
 
-const increment = () => count.value++;
-const decrement = () => count.value--;
+
+const increment = () => counterData.count++;
+const decrement = () => counterData.count--;
 </script>
 
 <style scoped>
