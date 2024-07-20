@@ -21,6 +21,9 @@
       </button>
 
     </div>
+
+    <p>This counter is odd: {{ oddOrEven }}</p>
+
     <div class="edit">
       <h4 class="edit-title">Edit title:</h4>
       <div class="edit__input-text">
@@ -34,12 +37,21 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, computed, watch } from 'vue';
 
 const incrementValue = 5;
 const counterData = reactive({
   count: 0,
   title: 'My Counter',
+});
+
+const oddOrEven = computed(() => counterData.count % 2 === 0 ? 'Even' : 'Odd');
+
+watch(() => counterData.count, (newVal, oldVal) => {
+  console.log(`Count changed from ${oldVal} to ${newVal}`);
+  if (newVal > 10) {
+    alert('Count reached 10');
+  }
 });
 
 const increment = () => counterData.count++;
@@ -48,6 +60,18 @@ const decrement = () => counterData.count--;
 const writeTitle = (e) => counterData.title = e.target.value;
 
 </script>
+
+<!--
+<script>
+export default {
+  computed: {
+    myComputedProp() {
+      return 'some result';
+    },
+  },
+}
+</script>
+-->
 
 <style scoped>
 .host {
