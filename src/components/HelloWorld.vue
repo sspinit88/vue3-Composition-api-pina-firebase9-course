@@ -1,58 +1,83 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+  <section class="host">
+    <h3 class="title">{{ title }} :</h3>
+
+    <div class="counter">
+      <button @click="decrement"
+              class="counter-minus">
+        -
+      </button>
+
+      <div class="counter-val">{{ count }}</div>
+
+      <button @click="increment"
+              class="counter-plus">
+        +
+      </button>
+
+
+    </div>
+    <div class="edit">
+      <h4 class="edit-title">Edit title:</h4>
+      <div class="edit__input-text">
+        <input v-model="title" type="text"
+               class="input-text">
+      </div>
+    </div>
+
+  </section>
 </template>
 
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+<script setup>
+import { ref } from 'vue';
+
+const count = ref(0);
+const title = ref('Counter App');
+
+const increment = () => count.value++;
+const decrement = () => count.value--;
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+.counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.counter-minus,
+.counter-plus {
+  background-color: blue;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
 }
-a {
-  color: #42b983;
+
+.counter-val {
+  font-size: 30px;
+  margin: 0 20px;
 }
+
+.edit-title {
+  margin-top: 20px;
+}
+
+.input-text {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.edit__input-text {
+  width: 500px
+}
+
 </style>
