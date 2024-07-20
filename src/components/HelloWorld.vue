@@ -15,6 +15,10 @@
         +
       </button>
 
+      <button @click="incrementBy()"
+              class="counter-plus">
+        + {{ incrementValue }}
+      </button>
 
     </div>
     <div class="edit">
@@ -32,12 +36,14 @@
 <script setup>
 import { reactive } from 'vue';
 
+const incrementValue = 5;
 const counterData = reactive({
   count: 0,
   title: 'My Counter',
 });
 
 const increment = () => counterData.count++;
+const incrementBy = (value = incrementValue) => counterData.count += value;
 const decrement = () => counterData.count--;
 const writeTitle = (e) => counterData.title = e.target.value;
 
