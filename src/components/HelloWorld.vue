@@ -20,7 +20,7 @@
     <div class="edit">
       <h4 class="edit-title">Edit title:</h4>
       <div class="edit__input-text">
-        <input v-model="counterData.title"
+        <input @input="writeTitle"
                type="text"
                class="input-text">
       </div>
@@ -37,9 +37,10 @@ const counterData = reactive({
   title: 'My Counter',
 });
 
-
 const increment = () => counterData.count++;
 const decrement = () => counterData.count--;
+const writeTitle = (e) => counterData.title = e.target.value;
+
 </script>
 
 <style scoped>
