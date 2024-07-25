@@ -1,26 +1,68 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <nav>
+    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/about">About</RouterLink>
+  </nav>
+
+  <RouterView />
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<style>
+@import '@/assets/base.css';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}
+
+header {
+  line-height: 1.5;
+  max-height: 100vh;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
   }
 }
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+nav {
+  width: 100%;
+  font-size: 12px;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 2rem;
+}
+
+nav a.router-link-exact-active {
+  color: var(--color-text);
+}
+
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
+}
+
+nav a:first-of-type {
+  border: 0;
 }
 </style>
