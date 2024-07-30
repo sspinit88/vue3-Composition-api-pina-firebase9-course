@@ -3,19 +3,9 @@
     <h1>Post</h1>
 
     <ul>
-      <li>
-        <RouterLink to="/posts/1">
-          Post 1
-        </RouterLink>
-      </li>
-      <li>
-        <RouterLink to="/posts/2">
-          Post 2
-        </RouterLink>
-      </li>
-      <li>
-        <RouterLink to="/posts/3">
-          Post 3
+      <li v-for="post in posts">
+        <RouterLink to="/posts/{{post.id}}">
+          {{ post.title }}
         </RouterLink>
       </li>
     </ul>
@@ -24,9 +14,21 @@
 </template>
 
 
-<script>
+<script lang="ts">
+import { reactive } from 'vue';
+import { POST_DATA } from '../constants/post.constant';
+
 export default {
-  name: 'PostView'
+  name: 'PostView',
+  setup() {
+    const posts = reactive(POST_DATA);
+
+    return {
+      posts,
+    }
+  }
+
+
 }
 </script>
 
