@@ -19,8 +19,12 @@ const router = createRouter({
     {
       ...PAGE_ROUTER_DATA.post.children.detail,
       component: () => import('../views/PostDetailView.vue')
+    },
+    {
+      ...PAGE_ROUTER_DATA.modals.main,
+      component: () => import('../views/ModalsView.vue'),
     }
   ]
-})
+});
 
 export default router;

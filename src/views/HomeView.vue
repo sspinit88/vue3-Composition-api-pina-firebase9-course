@@ -3,20 +3,20 @@
 
     <h2>{{ appTitle }}</h2>
 
-    <h3>{{ counterData.title }}:</h3>
+    <h3 ref="appTitleRef">{{ counterData.title }}:</h3>
 
     <div>
-      <button @click="decreaseCounter(2)"
+      <button @click="decreaseCounter(2, $event)"
               class="btn">--
       </button>
-      <button @click="decreaseCounter(1)"
+      <button @click="decreaseCounter(1, $event)"
               class="btn">-
       </button>
       <span class="counter">{{ counterData.count }}</span>
       <button @click="increaseCounter(1, $event)"
               class="btn">+
       </button>
-      <button @click="increaseCounter(2)"
+      <button @click="increaseCounter(2, $event)"
               class="btn">++
       </button>
     </div>
@@ -36,16 +36,18 @@
 <script setup
         lang="ts">
 
-import { reactive, computed, watch, onMounted, } from 'vue';
+import { reactive, computed, watch, onMounted, ref, nextTick } from 'vue';
 import { vAutoFocus } from '@/directives/v-auto-focus.ts';
 
 
 /*  app title */
 
-const appTitle: string = 'My Ok Counter App'
+const appTitle: string = 'My Ok Counter App';
+const appTitleRef = ref(null);
 
 onMounted(() => {
-  console.log('Do stuff related to App Title')
+  // appTitleRef.value = this.$refs.appTitleRef;
+  console.log('App title ref:', appTitleRef.value);
 })
 
 /* counter */
@@ -57,25 +59,33 @@ const counterData = reactive({
 
 watch(() => counterData.count, (newCount) => {
   if (newCount === 20) {
-    alert('Way to go! You made it to 20!!')
+    alert('Way to go! You made it to 20!!');
   }
 })
 
 const oddOrEven = computed(() => {
-  if (counterData.count % 2 === 0) return 'even'
-  return 'odd'
+  if (counterData.count % 2 === 0) return 'even';
+  return 'odd';
 })
 
-const increaseCounter = (amount, e) => {
-  counterData.count += amount
+const blur = (e) => {
+  return nextTick(() => {
+    console.log('DOM is updated with nextTick');
+  });
+};
+
+const increaseCounter = async (amount: number, e: Event) => {
+  counterData.count += amount;
+  await blur(e);
 }
 
-const decreaseCounter = amount => {
-  counterData.count -= amount
+const decreaseCounter = (amount: number, e: Event) => {
+  counterData.count -= amount;
+  blur(e);
 }
 
 onMounted(() => {
-  console.log('Do stuff related to Counter')
+  console.log('Do stuff related to Counter');
 })
 
 

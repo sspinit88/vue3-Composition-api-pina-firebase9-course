@@ -17,4 +17,10 @@ export const PAGE_ROUTER_DATA = {
 			}
 		}
 	},
+	modals: {
+		main: {
+			path: '/modals',
+			name: 'modals',
+		}
+	}
 };
