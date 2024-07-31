@@ -1,6 +1,7 @@
 <template>
   <div class="user-data">
     {{ userData.name }} is {{ userData.age }} years old.
+    Online: {{ onlineStatus }}
   </div>
 
   <nav>
@@ -16,6 +17,7 @@
         lang="ts">
 /*import*/
 import { provide, reactive } from 'vue';
+import { useOnline } from '@vueuse/core';
 
 /*user data*/
 const userData = reactive({
@@ -24,6 +26,9 @@ const userData = reactive({
 });
 
 provide('userData', userData);
+
+/* online status */
+const onlineStatus = useOnline();
 
 
 </script>

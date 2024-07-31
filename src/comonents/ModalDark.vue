@@ -7,9 +7,9 @@
       <h2>
         {{ subTitle }}
       </h2>
-      <!--      <pre>-->
-      <!--        {{ slots.title }}-->
-      <!--      </pre>-->
+      <p>
+        {{ userdata.name }} is {{ userdata.age }} years old.
+      </p>
       <button @click="close">
         Close Modal
       </button>
@@ -20,8 +20,7 @@
 <script setup
         lang="ts">
 /*imports*/
-import { useSlots } from 'vue';
-
+import { inject, useSlots } from 'vue';
 
 
 /*props*/
@@ -49,7 +48,9 @@ const close = () => {
   emit('closeModal', true);
 }
 
+/* inject */
 
+const userdata = inject('userData');
 
 </script>
 
