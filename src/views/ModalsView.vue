@@ -17,6 +17,7 @@
   <component v-if="showModal"
              :is="showDarkModal ? ModalDark : Modal"
              :subTitle='subTitle'
+             :userData="userData"
              @closeModal="closeModal">
     <template #title>
       <h2 slot="title">Modal Title v2</h2>
@@ -36,6 +37,12 @@ const showDarkModal = ref(false);
 const showModal = ref(false);
 
 const subTitle = ref('Main Modal Subtitle');
+
+const props = defineProps({
+  userData: {
+    type: Object,
+  },
+});
 
 const openModal = () => {
   showModal.value = true;

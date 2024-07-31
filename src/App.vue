@@ -1,12 +1,32 @@
 <template>
+  <div class="user-data">
+    {{ userData.name }} is {{ userData.age }} years old.
+  </div>
+
   <nav>
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/modals">Modals</RouterLink>
     <RouterLink to="/posts">Posts</RouterLink>
   </nav>
 
-  <RouterView />
+  <RouterView :userData="userData" />
 </template>
+
+<script setup
+        lang="ts">
+/*import*/
+import { provide, reactive } from 'vue';
+
+/*user data*/
+const userData = reactive({
+  name: 'John Doe',
+  age: 25,
+});
+
+provide('userData', userData);
+
+
+</script>
 
 <style>
 @import '@/assets/base.css';
@@ -65,5 +85,11 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
+}
+
+.user-data {
+  margin: 2rem 0;
+  font-size: 1.5rem;
+  text-align: center;
 }
 </style>

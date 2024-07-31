@@ -7,6 +7,9 @@
       <h2>
         {{ subTitle }}
       </h2>
+      <p>
+        {{ userData.name }} is {{ userData.age }} years old.
+      </p>
       <button @click="close">
         Close Modal
       </button>
@@ -29,6 +32,9 @@ const props = defineProps({
   subTitle: {
     type: String,
     default: 'Default Modal Subtitle',  // default value
+  },
+  userData: {
+    type: Object,
   },
 });
 
