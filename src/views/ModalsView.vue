@@ -3,18 +3,25 @@
     <h1>Modals</h1>
   </div>
 
+  <div class="dark">
+    <label>Dark Mode: </label>
+    <input v-model="showDarkModal"
+           type="checkbox">
+  </div>
+
   <button @click="openModal"
           class="btn">
     Show Modal
   </button>
 
-  <Modal v-if="showModal"
-         :subTitle='subTitle'
-         @closeModal="closeModal">
+  <component v-if="showModal"
+             :is="showDarkModal ? ModalDark : Modal"
+             :subTitle='subTitle'
+             @closeModal="closeModal">
     <template #title>
-      <h2 slot="title">Modal Title !</h2>
+      <h2 slot="title">Modal Title v2</h2>
     </template>
-  </Modal>
+  </component>
 
 </template>
 
@@ -23,8 +30,11 @@
 
 import { ref } from 'vue';
 import Modal from './../comonents/Modal.vue';
+import ModalDark from './../comonents/ModalDark.vue';
 
+const showDarkModal = ref(false);
 const showModal = ref(false);
+
 const subTitle = ref('Main Modal Subtitle');
 
 const openModal = () => {
@@ -32,7 +42,6 @@ const openModal = () => {
 };
 
 const closeModal = (val: boolean) => {
-  // console.log('g-closeModal', val);
   showModal.value = false;
 }
 </script>

@@ -1,12 +1,15 @@
 <template>
   <teleport to="body">
-    <div class="modal">
+    <div class="modal-dark">
       <h1>
         <slot name="title"/>
       </h1>
       <h2>
         {{ subTitle }}
       </h2>
+      <!--      <pre>-->
+      <!--        {{ slots.title }}-->
+      <!--      </pre>-->
       <button @click="close">
         Close Modal
       </button>
@@ -18,10 +21,8 @@
         lang="ts">
 /*imports*/
 import { useSlots } from 'vue';
-import { SetupContext } from '@vue/runtime-core';
 
-/*slots*/
-const slots: SetupContext['slots'] = useSlots();
+
 
 /*props*/
 
@@ -45,7 +46,6 @@ const emit = defineEmits({
 })
 
 const close = () => {
-  // console.log('e-closeModal')
   emit('closeModal', true);
 }
 
@@ -55,8 +55,9 @@ const close = () => {
 
 <style scoped>
 
-.modal {
-  background: beige;
+.modal-dark {
+  background: black;
+  color: white;
   padding: 10px;
   position: absolute;
   top: 0;
@@ -66,3 +67,4 @@ const close = () => {
   width: 100%;
 }
 </style>
+
